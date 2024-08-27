@@ -22,19 +22,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return bean;
     }
 
-    @Bean
-    public ViewResolver viewFormAdminUser() {
-        final InternalResourceViewResolver bean = new InternalResourceViewResolver();
-        bean.setViewClass(JstlView.class);
-        bean.setPrefix("/WEB-INF/view/admin/user/");
-        bean.setSuffix(".jsp");
-        return bean;
-    }
-
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.viewResolver(viewResolver());
-        registry.viewResolver(viewFormAdminUser());
     }
 
     @Override
