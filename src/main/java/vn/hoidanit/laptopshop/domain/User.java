@@ -1,16 +1,22 @@
 package vn.hoidanit.laptopshop.domain;
 
-import org.springframework.context.annotation.Bean;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String email;
     private String password;
     private String fullName;
     private String address;
     private String phone;
 
-    @Bean
     public long getId() {
         return id;
     }
@@ -61,7 +67,8 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("| %d | %s | %s | %s | %s | %s |", id, email, password, fullName, address, phone);
+        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
+                + ", address=" + address + ", phone=" + phone + "]";
     }
 
 }
