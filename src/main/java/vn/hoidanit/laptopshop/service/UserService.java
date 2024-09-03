@@ -19,13 +19,12 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public User getAllUserByEmail(String email) {
+    public List<User> getAllUserByEmail(String email) {
         return this.userRepository.findFirstByEmail(email);
     }
 
     public User handleSaveUser(User user) {
         User eric = this.userRepository.save(user);
-        System.out.println(eric);
         return eric;
     }
 }
