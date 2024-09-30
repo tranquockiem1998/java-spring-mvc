@@ -37,7 +37,7 @@
                                             <h1>Update a user</h1>
                                             <hr>
                                             <form:form method="post" action="/admin/user/update"
-                                                modelAttribute="newUser">
+                                                modelAttribute="newUser" class="row">
                                                 <div class="mb-3" style="display: none;">
                                                     <label class="form-label">Id: </label>
                                                     <form:input type="text" class="form-control" path="id" />
@@ -59,12 +59,30 @@
                                                     <label class="form-label">Phone</label>
                                                     <form:input type="text" class="form-control" path="phone" />
                                                 </div>
+                                                <div class="col-12 col-md-6 mb-4">
+                                                    <label for="Role" class="form-label">Role:</label>
+                                                    <form:select id="Role" class="form-select" path="role.name">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-3">
+                                                    <label for="avatarFile" class="form-label">Avatar:</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg" name="hoidanitFile" />
+                                                </div>
+
+                                                <div class="col-12 mb-3">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                        id="avatarPreview" />
+                                                </div>
                                                 <!-- <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                 </div> -->
-                                                <button type="submit" class="btn btn-warning">Update</button>
+
                                             </form:form>
+                                            <button type="submit" class="btn btn-warning">Update</button>
                                         </div>
                                     </div>
                                 </div>
