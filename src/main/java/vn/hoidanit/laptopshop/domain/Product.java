@@ -1,10 +1,15 @@
 package vn.hoidanit.laptopshop.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -12,15 +17,34 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @Size(min = 2, message = "Tên sản phẩm phải có tối thiểu 2 ký tự")
     private String name;
+
+    @NotNull
+    @Min(value = 1, message = "Giá sản phẩm phải lớn hơn 0")
     private double price;
     private String image;
+
+    @NotNull
+    @NotEmpty(message = "Mô tả chi tiết sản phẩm không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
+
+    @NotNull
+    @Size(min = 1, message = "Mô tả ngắn gọn sản phẩm không được để trống")
     private String shortDesc;
+
+    @NotNull
+    @Min(value = 1, message = "Số lượng sản phẩm phải lớn hơn 0")
     private long quantity;
+
     private long sold;
     private String factory;
     private String target; // mục đích sử dụng sản phẩm
+
+    private String avatar;
 
     public long getId() {
         return id;
@@ -100,6 +124,14 @@ public class Product {
 
     public void setTarget(String target) {
         this.target = target;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @Override

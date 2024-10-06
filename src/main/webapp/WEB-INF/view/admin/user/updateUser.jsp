@@ -11,10 +11,22 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Delete User</title>
+                <title>Update User</title>
                 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
             </head>
 
             <body class="sb-nav-fixed">
@@ -81,8 +93,8 @@
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                 </div> -->
 
+                                                <button type="submit" class="col-1 btn btn-warning">Update</button>
                                             </form:form>
-                                            <button type="submit" class="btn btn-warning">Update</button>
                                         </div>
                                     </div>
                                 </div>
