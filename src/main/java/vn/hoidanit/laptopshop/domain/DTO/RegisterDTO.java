@@ -1,5 +1,8 @@
 package vn.hoidanit.laptopshop.domain.DTO;
 
+import vn.hoidanit.laptopshop.service.validator.RegisterChecked;
+
+@RegisterChecked // Annotation tự định nghĩa
 public class RegisterDTO {
     private String firstName;
     private String lastName;
