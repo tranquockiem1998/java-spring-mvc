@@ -48,7 +48,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/", "/login", "/client/**", "/css/**", "/js/**", "/images/**").permitAll()
                 .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin.loginPage("/login").failureUrl("/login?error").permitAll());
-
+        // Xác thực quyền hạn người dùng ở đây. Sẽ được triển khai ở video tiếp theo
         return http.build();
     }
 
