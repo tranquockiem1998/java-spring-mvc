@@ -52,7 +52,8 @@ public class SecurityConfiguration {
                 .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin.loginPage("/login").failureUrl("/login?error")
                         .successHandler(customSuccessHandler())
-                        .permitAll());
+                        .permitAll())
+                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
         // Xác thực quyền hạn người dùng ở đây. Sẽ được triển khai ở video tiếp theo
         return http.build();
     }
