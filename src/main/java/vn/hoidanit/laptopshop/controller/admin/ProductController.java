@@ -1,6 +1,7 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,7 @@ public class ProductController {
 
     @RequestMapping("/admin/product/{id}")
     public String getProductDetailPage(Model model, @PathVariable long id) {
-        Product product = this.productService.getProductById(id);
+        Product product = this.productService.getProductById(id).get();
         model.addAttribute("product", product);
         model.addAttribute("id", id);
         return "admin/product/detail";
@@ -79,8 +80,8 @@ public class ProductController {
 
     @RequestMapping("/admin/product/update/{id}")
     public String getUpdateProduct(Model model, @PathVariable long id) {
-        Product currentProduct = this.productService.getProductById(id);
-        model.addAttribute("newProduct", currentProduct);
+        Optional<Product> currentProduct = this.productService.getProductById(id);
+        model.addAttribute("newProduct", currentProduct.get());
         return "admin/product/updateProduct";
     }
 
@@ -89,13 +90,13 @@ public class ProductController {
             BindingResult newProductBindingResult,
             @RequestParam("productImageFile") MultipartFile file) {
         if (newProductBindingResult.hasErrors()) {
-            Product currentProduct = this.productService.getProductById(product.getId());
+            Product currentProduct = this.productService.getProductById(product.getId()).get();
             product.setAvatar(currentProduct.getAvatar());
             model.addAttribute("newProduct", product);
             return "/admin/product/updateProduct";
         }
 
-        Product currentProduct = this.productService.getProductById(product.getId());
+        Product currentProduct = this.productService.getProductById(product.getId()).get();
         if (currentProduct != null) {
             if (!file.isEmpty()) {
                 String avatar = this.uploadService.handleSaveUploadFile(file, "product");

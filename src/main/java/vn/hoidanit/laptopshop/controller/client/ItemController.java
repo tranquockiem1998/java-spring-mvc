@@ -10,6 +10,9 @@ import vn.hoidanit.laptopshop.service.ProductService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ItemController {
 
@@ -21,15 +24,19 @@ public class ItemController {
 
     @GetMapping("/product/{id}")
     public String getMethodName(Model model, @PathVariable long id) {
-        Product product = this.productService.getProductById(id);
+        Product product = this.productService.getProductById(id).get();
         model.addAttribute("product", product);
         model.addAttribute("id", id);
         return "client/product/detail";
     }
 
     @PostMapping("/add-product-to-cart/{id}")
-    public String addProductToCart(@PathVariable long id) {
+    public String addProductToCart(@PathVariable long id, HttpServletRequest request) {
 
+        HttpSession session = request.getSession(false);
+        long productId = id;
+        String email = (String) session.getAttribute("email");
+        this.productService.handleAddProductToCart(email, productId);
         return "redirect:/";
     }
 
